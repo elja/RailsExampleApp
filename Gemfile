@@ -1,12 +1,15 @@
 source 'https://rubygems.org'
-gem 'rails', '3.2.8'
+gem 'rails', '>= 3.2.8'
 gem 'sqlite3'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
+
 gem 'jquery-rails'
+
 gem "slim", ">= 1.3.0"
 gem "haml2slim", ">= 0.4.6", :group => :development
 gem "haml", ">= 3.1.6", :group => :development
@@ -23,3 +26,9 @@ gem "factory_girl_rails", ">= 4.0.0", :group => [:development, :test]
 gem "devise", ">= 2.1.2"
 gem "therubyracer", ">= 0.10.2", :group => :assets, :platform => :ruby
 gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
+
+
+#deployment
+gem "capistrano", :group => :development
+gem 'capistrano-ext', :group => :development
+gem 'rvm-capistrano', :group => :development
