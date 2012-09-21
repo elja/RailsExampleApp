@@ -2,7 +2,7 @@
 require "capistrano/ext/multistage"
 
 #for assets
-require "deploy/assets"
+load "deploy/assets"
 
 #for bundler
 require "bundler/capistrano"
