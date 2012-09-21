@@ -44,12 +44,6 @@ namespace :deploy do
 
 end
 
-after "deploy:update_code", "sunspot:stop"
-after "deploy:update",  "deploy:cleanup"
-after "deploy:symlink", "deploy:create_symlinks"
-after "deploy:restart", "deploy:migrate"
-after "deploy:migrate", "deploy:seed"
-
 # Delayed Job
 
 #before "deploy:restart", "delayed_job:stop"

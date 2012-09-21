@@ -1,9 +1,6 @@
 #for multistage deployment
 require "capistrano/ext/multistage"
 
-#for assets
-load "deploy/assets"
-
 #for bundler
 require "bundler/capistrano"
 
@@ -52,7 +49,7 @@ end
 
 
 before 'deploy:setup', 'rvm:install_rvm'
-before 'deploy',       'rvm:install_rvm'
-
-after "deploy:update_code", "bundler:bundle_new_release"
-after "assets:precompile",  "assets:static"
+before 'deploy:setup', 'rvm:install_ruby'
+after "deploy:finalize_update", "deploy:symlink_config"
+after "deploy:update_code", "deploy:migrate"
+after "deploy:restart", "deploy:cleanup"
