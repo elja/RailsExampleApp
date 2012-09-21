@@ -2,7 +2,7 @@ require 'capistrano/ext/multistage'
 
 app_name = "RailsExampleApp"
 
-set :application,   "http://198.101.248.196/"
+set :application,   "198.101.248.196"
 set :scm,           :git
 set :repository,    "git://github.com/elja/RailsExampleApp.git"
 set :branch,        "master"
