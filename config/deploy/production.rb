@@ -25,28 +25,8 @@ role :app, application
 role :db,  application, :primary => true
 
 namespace :deploy do
-
-  task :create_symlinks, :role => :app do
-    #run "ln -nfs #{shared_path}/uploads #{release_path}/public/"
+  task :restart, roles: :app, except: { no_release: true } do
+    run "touch #{release_path}/tmp/restart.txt"
   end
-
-  task :migrate, :roles => :app do
-    run "cd #{release_path} && RAILS_ENV=#{rails_env} rake db:migrate"
-  end
-
-  task :seed, :roles => :app do
-    run "cd #{release_path} && RAILS_ENV=#{rails_env} rake db:seed"
-  end
-
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-  end
-
 end
 
-# Delayed Job
-
-#before "deploy:restart", "delayed_job:stop"
-#after  "deploy:restart", "delayed_job:start"
-#after  "deploy:stop",    "delayed_job:stop"
-#after  "deploy:start",   "delayed_job:start"
