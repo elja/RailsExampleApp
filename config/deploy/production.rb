@@ -27,8 +27,7 @@ role :db,  application, :primary => true
 namespace :deploy do
   task :setup_config, roles: :app do
     run "mkdir -p #{shared_path}/config"
-    put File.read("config/database.yml.example"), "#{shared_path}/database.yml"
-
+    put File.read("config/database.yml.example"), "#{shared_path}/config/database.yml"
     puts "Now edit the config files in #{shared_path}."
   end
 
@@ -36,3 +35,5 @@ namespace :deploy do
     run "touch #{release_path}/tmp/restart.txt"
   end
 end
+
+after 'deploy:setup', 'deploy:setup_config'
